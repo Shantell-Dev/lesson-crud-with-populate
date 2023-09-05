@@ -17,7 +17,6 @@ router.post("/user-create", (req, res) => {
   User.findOne({ username })
     .then((userDocFromDB) => {
       if (!userDocFromDB) {
-        // prettier-ignore
         User.create({ username })
         .then(() => res.redirect('/post-create'));
       } else {
@@ -42,6 +41,8 @@ router.get("/users", (req, res) => {
 // GET details of a specific user (primarily their posts)
 // ****************************************************************************************
 
-// ... your code here
+router.get('/users/:userId/posts', (req, res, next) => {
+  // ... your code here
+});
 
 module.exports = router;
