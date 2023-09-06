@@ -42,7 +42,15 @@ router.get("/users", (req, res) => {
 // ****************************************************************************************
 
 router.get('/users/:userId/posts', (req, res, next) => {
-  // ... your code here
+  const { userId } = req.params;
+ 
+  Post.findById(userId)
+    .populate('author')
+    .then(foundPost => res.render('user/details', foundPost))
+    .catch(err => {
+      console.log(`Err while getting a single post from the  DB: ${err}`);
+      next(err);
+    });
 });
 
 module.exports = router;
